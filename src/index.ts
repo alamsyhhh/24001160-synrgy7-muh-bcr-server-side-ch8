@@ -25,9 +25,7 @@ app.use(`${v1}`, carRoutes, errorHandlingMiddleware)
 app.use(`${v1}`, userRoutes)
 
 app.get('/', (_req: Request, res: Response) => {
-  res.status(200).json({
-    message: 'Rest API BCR Alamsyhh'
-  })
+  res.send('<h1>Welcome to My Rest API BCR Alamsyhh Server</h1>')
 })
 
 app.listen(PORT, () => {

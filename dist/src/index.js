@@ -23,9 +23,7 @@ app.use('/api-docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.de
 app.use(`${v1}`, carsRoutes_1.carRoutes, errorUploadHandlingMiddleware_1.default);
 app.use(`${v1}`, usersRoutes_1.userRoutes);
 app.get('/', (_req, res) => {
-    res.status(200).json({
-        message: 'Rest API BCR Alamsyhh'
-    });
+    res.send('<h1>Welcome to My Rest API BCR Alamsyhh Server</h1>');
 });
 app.listen(PORT, () => {
     console.log(`⚡️[server]: Server is running at http://localhost:${PORT}/`);
