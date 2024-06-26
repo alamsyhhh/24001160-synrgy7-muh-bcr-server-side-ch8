@@ -24,9 +24,10 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(apidocs))
 app.use(`${v1}`, carRoutes, errorHandlingMiddleware)
 app.use(`${v1}`, userRoutes)
 
-// Route to display a message on the homepage
 app.get('/', (_req: Request, res: Response) => {
-  res.send('<h1>Welcome to My Server</h1>')
+  res.status(200).json({
+    message: 'Rest API BCR Alamsyhh'
+  })
 })
 
 app.listen(PORT, () => {

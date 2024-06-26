@@ -22,9 +22,10 @@ const v1 = '/api/v1';
 app.use('/api-docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(apidocs_json_1.default));
 app.use(`${v1}`, carsRoutes_1.carRoutes, errorUploadHandlingMiddleware_1.default);
 app.use(`${v1}`, usersRoutes_1.userRoutes);
-// Route to display a message on the homepage
 app.get('/', (_req, res) => {
-    res.send('<h1>Welcome to My Server</h1>');
+    res.status(200).json({
+        message: 'Rest API BCR Alamsyhh'
+    });
 });
 app.listen(PORT, () => {
     console.log(`⚡️[server]: Server is running at http://localhost:${PORT}/`);
