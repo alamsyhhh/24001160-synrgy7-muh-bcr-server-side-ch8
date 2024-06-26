@@ -1,4 +1,4 @@
-import express, { Express } from 'express'
+import express, { Express, Request, Response } from 'express'
 import { carRoutes } from './routes/carsRoutes'
 import { userRoutes } from './routes/usersRoutes'
 import { knexInstance } from '../config/postgresConfig'
@@ -24,6 +24,11 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(apidocs))
 app.use(`${v1}`, carRoutes, errorHandlingMiddleware)
 app.use(`${v1}`, userRoutes)
 
+// Route to display a message on the homepage
+app.get('/', (_req: Request, res: Response) => {
+  res.send('<h1>Welcome to My Server</h1>')
+})
+
 app.listen(PORT, () => {
-  console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`)
+  console.log(`⚡️[server]: Server is running at http://localhost:${PORT}/`)
 })
