@@ -3,7 +3,7 @@ import { Response } from 'express'
 
 const storage = multer.memoryStorage()
 
-const fileFilter = (req: any, file: any, cb: any) => {
+const fileFilter = (req: any, file: any, cb: any): void => {
   const allowedMimeTypes = ['image/jpeg', 'image/png']
   const res: Response = req.res
 
@@ -44,5 +44,5 @@ export function generateUniqueFileName(fileName: string): string {
 
 export function extractPublicId(imageUrl: string): string | null {
   const match = imageUrl.match(/\/([^/]+)\/([^/]+)\./)
-  return (match != null) ? `${match[1]}/${match[2]}` : null
+  return match != null ? `${match[1]}/${match[2]}` : null
 }

@@ -1,4 +1,4 @@
-import { Model, ModelObject } from 'objection'
+import { Model, ModelObject, RelationMappings } from 'objection'
 import { RolesModel } from './rolesModel'
 
 export class UsersModel extends Model {
@@ -10,11 +10,11 @@ export class UsersModel extends Model {
   createdAt!: Date
   updatedAt!: Date
 
-  static get tableName() {
+  static get tableName(): string {
     return 'users'
   }
 
-  static get relationMappings() {
+  static get relationMappings(): RelationMappings {
     return {
       role: {
         relation: Model.BelongsToOneRelation,

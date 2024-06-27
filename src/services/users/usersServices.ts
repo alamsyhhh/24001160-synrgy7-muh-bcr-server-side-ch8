@@ -8,6 +8,7 @@ import { IUsersService } from './usersServiceInterface'
 import { UserCurrentDto } from '../../dto/users/usersCurrentDto'
 
 export class UsersService implements IUsersService {
+  // eslint-disable-next-line no-useless-constructor
   constructor(
     private readonly usersRepository: IUsersRepository,
     private readonly hashPassword: (password: string) => Promise<string>,

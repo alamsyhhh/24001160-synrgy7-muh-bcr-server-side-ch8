@@ -45,7 +45,7 @@ class CarRepository implements ICarRepository {
 
   async getCarById(carId: string): Promise<CarDTO | undefined> {
     const car = await CarsModel.query().findById(carId)
-    return car ? this.mapToCarDTO(car) : undefined
+    return car != null ? this.mapToCarDTO(car) : undefined
   }
 
   async createCar(carData: Partial<CarDTO>): Promise<CarDTO> {

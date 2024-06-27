@@ -21,11 +21,11 @@ export const authenticateToken = async (
 ): Promise<void> => {
   const authHeader = req.headers.authorization
 
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+  if (!authHeader?.startsWith('Bearer ')) {
     return handleErrorResponse(res, 401, 'Access Token Required')
   }
 
-  const token = authHeader.split(' ')[1]?.trim() // Optional chaining for safer access
+  const token = authHeader.split(' ')[1]?.trim()
 
   try {
     const secretKey = process.env.JWT_SECRET as string
@@ -36,19 +36,17 @@ export const authenticateToken = async (
     const decoded = jwt.verify(token, secretKey) as DecodedToken
 
     if (!decoded?.id) {
-      // Optional chaining to check for existence
       throw new Error('Token does not contain user ID')
     }
 
     const user = await UsersModel.query().findById(decoded.id)
 
-    if (user == null) {
-      // Explicit check for null or undefined
+    if (!user) {
       return handleErrorResponse(res, 404, 'User not found')
     }
 
     req.user = user
-    next()
+    return next()
   } catch (err) {
     return handleErrorResponse(res, 403, 'Invalid Access Token')
   }
@@ -56,10 +54,9 @@ export const authenticateToken = async (
 
 export const authorizeRoles = (...roles: string[]) => {
   return (req: AuthenticatedRequest, res: Response, next: NextFunction): void => {
-    if ((req.user == null) || !roles.includes(req.user.roleId || '')) {
-      // Handle nullable roleId explicitly
+    if (!req.user || !roles.includes(req.user.roleId || '')) {
       return handleErrorResponse(res, 403, 'Access Denied')
     }
-    next()
+    return next()
   }
 }

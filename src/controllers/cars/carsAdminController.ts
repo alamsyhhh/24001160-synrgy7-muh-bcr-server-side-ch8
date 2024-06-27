@@ -16,7 +16,6 @@ class CarsAdminController {
       const page = parseInt(req.query.page as string) || 1
       let pageSize = parseInt(req.query.pageSize as string) || -1
 
-      // Explicit check for NaN and zero values
       if (isNaN(pageSize) || pageSize <= 0) {
         pageSize = -1
       }
@@ -30,7 +29,10 @@ class CarsAdminController {
 
   async getCarById(req: Request, res: Response): Promise<void> {
     const carId = req.params.id
-    carService.getCarById(res, carId)
+    await carService.getCarById(res, carId).catch((error) => {
+      console.error('Error getting car by ID:', error)
+      handleInternalServerError(res, 'Internal Server Error')
+    })
   }
 
   async createCar(req: Request, res: Response): Promise<void> {
@@ -44,7 +46,6 @@ class CarsAdminController {
     } catch (error: any) {
       console.error(error)
 
-      // Explicit type check for error.message
       if (
         typeof error.message === 'string' &&
         (error.message.includes('Missing required fields') ||
@@ -71,7 +72,6 @@ class CarsAdminController {
     } catch (error: any) {
       console.error(error)
 
-      // Explicit type check for error.message
       if (
         typeof error.message === 'string' &&
         (error.message === 'Price must be a positive number' || error.message === 'Failed to get username from token')
@@ -85,7 +85,6 @@ class CarsAdminController {
 
   async deleteCar(req: Request, res: Response): Promise<void> {
     const carId = req.params.id
-    // Await the promise and handle errors
     try {
       await carService.deleteCarById(req, res, carId)
     } catch (error) {

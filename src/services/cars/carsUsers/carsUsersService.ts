@@ -8,6 +8,7 @@ interface CarResponse {
 }
 
 class CarsUsersService implements CarsUsersServiceInterface {
+  // eslint-disable-next-line no-useless-constructor
   constructor(private readonly repository: CarsUsersRepositoryInterface) {}
 
   async getAllCars(category?: string, name?: string, page?: number, pageSize: number = 10): Promise<CarResponse> {

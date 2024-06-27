@@ -33,6 +33,9 @@
     "no-useless-constructor": "error",
     "camelcase": "off",
     "no-unused-vars": "warn",
-    "callback-return": ["warn", ["warn", "callback", "next"]]
+    "callback-return": ["warn", ["warn", "callback", "next"]],
+    "@typescript-eslint/strict-boolean-expressions": "off",
+    "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/no-floating-promises": "off"
   }
 }

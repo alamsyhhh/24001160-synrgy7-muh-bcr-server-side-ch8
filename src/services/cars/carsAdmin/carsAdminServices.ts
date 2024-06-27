@@ -129,7 +129,6 @@ class CarService implements ICarService {
             console.error(err)
             console.error('Error converting dates:', error)
             throw new Error('Failed to create car: Invalid date format')
-            reject(new Error('Failed to create car'))
           }
         }
       )
